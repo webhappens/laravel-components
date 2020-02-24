@@ -1,0 +1,62 @@
+
+{
+    "name": "webhappens/laravel-components",
+    "description": "Fluid interface to defined data on a component that can render itself to a view.",
+    "keywords": [
+        "webhappens",
+        "components",
+        "laravel"
+    ],
+    "homepage": "https://github.com/webhappens/laravel-components",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sam Leicester",
+            "email": "sam@webhappens.co.uk",
+            "homepage": "https://webhappens.co.uk",
+            "role": "Developer"
+        },
+        {
+            "name": "Ben Gurney",
+            "email": "ben@webhappens.co.uk",
+            "homepage": "https://webhappens.co.uk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "webhappens/conditional-methods": "^0.1",
+        "webhappens/magic-properties": "^0.1",
+        "laravel/framework": "^6.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.12",
+        "symfony/var-dumper": "^4.3",
+        "phpunit/phpunit": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "WebHappens\\Components\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WebHappens\\Components\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "fix": "vendor/bin/php-cs-fixer",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WebHappens\\Components\\ComponentServiceProvider"
+            ]
+        }
+    }
+}
