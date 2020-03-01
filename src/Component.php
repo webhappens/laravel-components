@@ -14,12 +14,10 @@ use WebHappens\ConditionalMethods\NotConditionalMethod;
 abstract class Component implements Htmlable, Arrayable, Jsonable, JsonSerializable
 {
     use MagicProperties,
-        ConditionalMethods {
-            MagicProperties::__call as __call_magic_properties;
-            ConditionalMethods::__call as __call_conditional;
-    }
+        ConditionalMethods;
 
     protected $isVisible = true;
+    protected $attributes;
 
     public static function make(...$args)
     {
@@ -28,6 +26,8 @@ abstract class Component implements Htmlable, Arrayable, Jsonable, JsonSerializa
 
     public function __construct($data = [])
     {
+        $this->attributes = new Attributes;
+
         $this->with($data);
 
         if (method_exists($this, 'init')) {
@@ -38,6 +38,11 @@ abstract class Component implements Htmlable, Arrayable, Jsonable, JsonSerializa
     public function with($data) {
         if ($data instanceof Arrayable) {
             $data = $data->toArray();
+        }
+
+        if (isset($data['attributes'])) {
+            $this->attributes->setAttributes($data['attributes']);
+            unset($data['attributes']);
         }
 
         $this->setPropertyValues($data);
@@ -123,16 +128,24 @@ abstract class Component implements Htmlable, Arrayable, Jsonable, JsonSerializa
 
     public function __call($method, $arguments)
     {
-        try {
-            return $this->__call_conditional($method, $arguments);
-        } catch (NotConditionalMethod $e) {}
+        if ($type = static::matchConditionalMethod($method)) {
+            return $this->callConditionalMethod($type, $method, $arguments);
+        }
 
-        try {
-            return $this->__call_magic_properties($method, $arguments);
-        } catch (\BadMethodCallException $e) {}
+        if (method_exists($this->attributes, $method)) {
+            $this->attributes->{$method}(...$arguments);
+
+            return $this;
+        }
+
+        if ($property = $this->matchMagicProperty($method)) {
+            return $this->callMagicProperty($property, $arguments);
+        }
 
         throw new \BadMethodCallException(sprintf(
-            'Call to undefined method %s::%s()', static::class, $method
+            'Call to undefined method %s::%s()',
+            static::class,
+            $method
         ));
     }
 }
