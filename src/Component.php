@@ -9,7 +9,6 @@ use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;
 use WebHappens\MagicProperties\MagicProperties;
 use WebHappens\ConditionalMethods\ConditionalMethods;
-use WebHappens\ConditionalMethods\NotConditionalMethod;
 
 abstract class Component implements Htmlable, Arrayable, Jsonable, JsonSerializable
 {
@@ -46,6 +45,8 @@ abstract class Component implements Htmlable, Arrayable, Jsonable, JsonSerializa
         }
 
         $this->setPropertyValues($data);
+
+        return $this;
     }
 
     public function show()
