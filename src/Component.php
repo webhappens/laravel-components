@@ -18,12 +18,12 @@ abstract class Component implements Htmlable, Arrayable, Jsonable, JsonSerializa
     protected $isVisible = true;
     protected $attributes;
 
-    public static function make(...$args)
+    public static function make()
     {
-        return new static(...$args);
+        return new static(...func_get_args());
     }
 
-    public function __construct($data = [])
+    public function __construct()
     {
         $this->attributes = new Attributes;
 
