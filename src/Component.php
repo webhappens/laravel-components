@@ -27,8 +27,6 @@ abstract class Component implements Htmlable, Arrayable, Jsonable, JsonSerializa
     {
         $this->attributes = new Attributes;
 
-        $this->with($data);
-
         if (method_exists($this, 'init')) {
             $this->init();
         }
