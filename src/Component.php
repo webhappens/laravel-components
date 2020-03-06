@@ -131,14 +131,14 @@ abstract class Component implements Htmlable, Arrayable, Jsonable, JsonSerializa
             return $this->callConditionalMethod($type, $method, $arguments);
         }
 
+        if ($property = $this->matchMagicProperty($method)) {
+            return $this->callMagicProperty($property, $arguments);
+        }
+
         if (method_exists($this->attributes, $method)) {
             $this->attributes->{$method}(...$arguments);
 
             return $this;
-        }
-
-        if ($property = $this->matchMagicProperty($method)) {
-            return $this->callMagicProperty($property, $arguments);
         }
 
         throw new \BadMethodCallException(sprintf(
