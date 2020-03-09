@@ -25,8 +25,8 @@
     ],
     "require": {
         "php": "^7.3",
-        "webhappens/conditional-methods": "~0.2",
-        "webhappens/magic-properties": "~0.2",
+        "webhappens/conditional-methods": "dev-master",
+        "webhappens/magic-properties": "dev-master",
         "laravel/framework": "^6.0"
     },
     "require-dev": {
