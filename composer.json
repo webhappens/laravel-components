@@ -27,7 +27,7 @@
         "php": "^7.3",
         "webhappens/conditional-methods": "dev-master",
         "webhappens/magic-properties": "dev-master",
-        "laravel/framework": "^6.0"
+        "laravel/framework": "^6.0|^7.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.12",
