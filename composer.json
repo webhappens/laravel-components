@@ -24,10 +24,10 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.3|^8.0",
         "webhappens/conditional-methods": "dev-master",
         "webhappens/magic-properties": "dev-master",
-        "laravel/framework": "^6.0|^7.0"
+        "laravel/framework": "^6.0|^7.0|^8.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.12",
